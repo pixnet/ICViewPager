@@ -15,7 +15,7 @@
 
 #define kTabHeight 44.0
 #define kTabOffset 56.0
-#define kTabWidth 128.0
+#define kTabWidth 50.0
 #define kTabLocation 1.0
 #define kStartFromSecondTab 0.0
 #define kCenterCurrentTab 0.0
