@@ -220,8 +220,10 @@
     frame = self.contentView.frame;
     frame.origin.x = 0.0;
     frame.origin.y = [self.tabLocation boolValue] ? topLayoutGuide + CGRectGetHeight(self.tabsView.frame) : topLayoutGuide;
+    frame.origin.y -= CGRectGetHeight(self.tabsView.frame);
     frame.size.width = CGRectGetWidth(self.view.frame);
     frame.size.height = CGRectGetHeight(self.view.frame) - (topLayoutGuide + CGRectGetHeight(self.tabsView.frame)) - CGRectGetHeight(self.tabBarController.tabBar.frame);
+    frame.size.height += CGRectGetHeight(self.tabsView.frame);
     self.contentView.frame = frame;
 }
 
