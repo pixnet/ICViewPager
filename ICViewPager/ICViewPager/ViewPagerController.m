@@ -13,9 +13,9 @@
 #define kContentViewTag 34
 #define IOS_VERSION_7 [[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending
 
-#define kTabHeight 31.0
+#define kTabHeight 44.0
 #define kTabOffset 56.0
-#define kTabWidth 50.0
+#define kTabWidth 128.0
 #define kTabLocation 1.0
 #define kStartFromSecondTab 0.0
 #define kCenterCurrentTab 0.0
@@ -203,13 +203,14 @@
 - (void)layoutSubviews {
     
     CGFloat topLayoutGuide = 0.0;
-    if (IOS_VERSION_7 && self.navigationController.navigationBar.translucent) {
-        topLayoutGuide = 20.0;
-        if (self.navigationController && !self.navigationController.navigationBarHidden) {
-            topLayoutGuide += self.navigationController.navigationBar.frame.size.height;
-        }
-    }
-    
+    /*
+     if (IOS_VERSION_7) {
+     topLayoutGuide = 20.0;
+     if (self.navigationController && !self.navigationController.navigationBarHidden) {
+     topLayoutGuide += self.navigationController.navigationBar.frame.size.height;
+     }
+     }
+     */
     CGRect frame = self.tabsView.frame;
     frame.origin.x = 0.0;
     frame.origin.y = [self.tabLocation boolValue] ? topLayoutGuide : CGRectGetHeight(self.view.frame) - [self.tabHeight floatValue];
@@ -220,11 +221,12 @@
     frame = self.contentView.frame;
     frame.origin.x = 0.0;
     frame.origin.y = [self.tabLocation boolValue] ? topLayoutGuide + CGRectGetHeight(self.tabsView.frame) : topLayoutGuide;
-    frame.origin.y -= CGRectGetHeight(self.tabsView.frame);
     frame.size.width = CGRectGetWidth(self.view.frame);
-    frame.size.height = CGRectGetHeight(self.view.frame) - (topLayoutGuide + CGRectGetHeight(self.tabsView.frame)) - CGRectGetHeight(self.tabBarController.tabBar.frame);
-    frame.size.height += CGRectGetHeight(self.tabsView.frame);
+#warning custom here
+    frame.size.height = CGRectGetHeight(self.view.frame) - (topLayoutGuide + CGRectGetHeight(self.tabsView.frame)) - CGRectGetHeight(self.tabBarController.tabBar.frame) + 48;
+    
     self.contentView.frame = frame;
+    
 }
 
 #pragma mark - IBAction
@@ -581,7 +583,7 @@
         return;
     }
     
-    self.animatingToTab = YES;
+    self.animatingToTab = NO;
     
     // Set activeTabIndex
     self.activeTabIndex = index;
@@ -749,7 +751,7 @@
                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                             options:nil];
     [self addChildViewController:self.pageViewController];
-
+    
     // Setup some forwarding events to hijack the scrollView
     // Keep a reference to the actual delegate
     self.actualDelegate = ((UIScrollView *)[self.pageViewController.view.subviews objectAtIndex:0]).delegate;
@@ -877,7 +879,7 @@
     }
     
     if ([[self.tabs objectAtIndex:index] isEqual:[NSNull null]]) {
-
+        
         // Get view from dataSource
         UIView *tabViewContent = [self.dataSource viewPager:self viewForTabAtIndex:index];
         tabViewContent.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
