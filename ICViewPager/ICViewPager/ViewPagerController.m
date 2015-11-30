@@ -869,6 +869,10 @@
 
     // Set setup done
     self.defaultSetupDone = YES;
+    
+    if ([_delegate respondsToSelector:@selector(viewPageDidFinishSetup:)]) {
+        [_delegate viewPageDidFinishSetup:self];
+    }
 }
 
 - (TabView *)tabViewAtIndex:(NSUInteger)index {

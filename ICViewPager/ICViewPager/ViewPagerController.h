@@ -197,5 +197,10 @@ typedef NS_ENUM(NSUInteger, ViewPagerComponent) {
  * @return A UIColor for the given component
  */
 - (UIColor *)viewPager:(ViewPagerController *)viewPager colorForComponent:(ViewPagerComponent)component withDefault:(UIColor *)color;
-
+/**
+ *  view pager set up 結束了
+ *
+ *  @param viewPager this view pager
+ */
+- (void)viewPageDidFinishSetup:(ViewPagerController *)viewPager;
 @end
