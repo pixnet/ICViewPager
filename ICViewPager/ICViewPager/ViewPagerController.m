@@ -870,8 +870,8 @@
     // Set setup done
     self.defaultSetupDone = YES;
     
-    if ([_delegate respondsToSelector:@selector(viewPageDidFinishSetup:)]) {
-        [_delegate viewPageDidFinishSetup:self];
+    if ([_delegate respondsToSelector:@selector(viewPagerDidFinishSetup:)]) {
+        [_delegate viewPagerDidFinishSetup:self];
     }
 }
 

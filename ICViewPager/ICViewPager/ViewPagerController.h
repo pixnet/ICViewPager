@@ -202,5 +202,5 @@ typedef NS_ENUM(NSUInteger, ViewPagerComponent) {
  *
  *  @param viewPager this view pager
  */
-- (void)viewPageDidFinishSetup:(ViewPagerController *)viewPager;
+- (void)viewPagerDidFinishSetup:(ViewPagerController *)viewPager;
 @end
